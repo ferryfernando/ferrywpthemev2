@@ -11,22 +11,29 @@
     <?php wp_head(); ?>
 </head>
 
-<body>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+
     <header>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark-ffe fixed-top" id="sideNav">
-            <a href="index.html" class="navbar-brand">Ferry Fernando</a>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand"><?php bloginfo('name'); ?></a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                    class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                </ul>
-            </div>
+            <?php
+                wp_nav_menu( array(
+                    'theme_location'    => 'primary-nav',
+                    'depth'             => 2,
+                    'container'         => 'div',
+                    'container_class'   => 'collapse navbar-collapse',
+                    'container_id'      => 'navbarResponsive',
+                    'menu_class'        => 'navbar-nav',
+                    'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                    'walker'            => new WP_Bootstrap_Navwalker(),
+                ) );
+            ?>
         </nav>
     </header>
