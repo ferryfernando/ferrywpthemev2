@@ -4,6 +4,9 @@ if ( ! function_exists( 'ferrywpthemev2_setup' ) ) :
 		function ferrywpthemev2_setup()	{
 			add_theme_support( 'title-tag' );
 			
+			//Add featured image support
+			add_theme_support('post-thumbnails');
+			
 			register_nav_menus(
 				array(
 				  'primary-nav' => esc_html__( 'Primary Nav', 'ferrywpthemev2' ),
