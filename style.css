@@ -88,11 +88,11 @@ h1,
     box-shadow: 0 0 0 0.25rem rgb(240 18 190 / 50%);
 }
 
-a.text-pink {
+a, a.text-pink {
     text-decoration: none;
 }
 
-a.text-pink:hover {
+a:hover, a.text-pink:hover {
     color: #f012be;
     text-decoration: underline;
 }

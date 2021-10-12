@@ -4,6 +4,95 @@
     <div class="row">
         <div class="col-md-9 p-0">
         
+            <!-- Carousel -->
+            <div id="carouselExampleDark" class="carousel carousel-dark slide p-0" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+
+                <div class="carousel-inner">
+
+                <?php
+                    $args = array(
+                        'posts_per_page' => 3,
+                        'post__in' => get_option( 'sticky_posts' ),
+                        'ignore_sticky_posts' => 1
+                );
+                $query = new WP_Query( $args );
+
+                    if ( $query->have_posts() ) : 
+                        // Start the Loop 
+                        while ( $query->have_posts() ) : $query->the_post(); 
+                            echo the_title();
+                        // End the Loop 
+                        endwhile; 
+                    else: 
+                    // If no posts match this query, output this text. 
+                        _e( 'Sorry, no posts matched your criteria.', 'textdomain' ); 
+                    endif;
+
+                ?>
+                
+                    <div class="carousel-item active" data-bs-interval="5000">
+                        <img src="1.jpg" class="d-block w-100" alt="slide-satu">
+                        <div class="carousel-caption">
+                            <h3><a href="lihat-post.html" class="text-pink">Slide Satu</a></h3>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i> Selasa, 21-01-2020</li>
+                                <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a href="#" class="text-pink"> Musik</a></li>
+                            </ul>
+                            <p class="d-none d-sm-block text-white">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Integer posuere erat a ante. Nulla vitae elit libero, a pharetra
+                                augue mollis interdum.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <img src="2.jpg" class="d-block w-100" alt="slide-dua.">
+                        <div class="carousel-caption">
+                            <h3><a href="lihat-post.html" class="text-pink">Slide Satu</a></h3>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i>
+                                    Selasa, 21-01-2020</li>
+                                <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a
+                                        href="#" class="text-pink"> Musik</a></li>
+                            </ul>
+                            <p class="d-none d-sm-block text-white">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Integer posuere erat a ante. Nulla vitae elit libero, a pharetra
+                                augue mollis interdum.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <img src="3.jpg" class="d-block w-100" alt="slide-tiga">
+                        <div class="carousel-caption">
+                            <h3><a href="lihat-post.html" class="text-pink">Slide Satu</a></h3>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i>
+                                    Selasa, 21-01-2020</li>
+                                <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a
+                                        href="#" class="text-pink"> Musik</a></li>
+                            </ul>
+                            <p class="d-none d-sm-block text-white">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Integer posuere erat a ante. Nulla vitae elit libero, a pharetra
+                                augue mollis interdum.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div> <!-- /Carausel-->
+
             <!-- Post-->
             <?php 
                 if ( have_posts() ) : 
@@ -27,7 +116,7 @@
                                         <h3 class="card-title mb-0"><a href="<?php the_permalink(); ?>" class="text-pink"><?php the_title(); ?></a></h3>
                                         <ul class="list-inline mb-0">
                                             <li class="list-inline-item text-muted small"><i class="bi bi-calendar4-event"></i> <?php the_time('l, d F Y') ?></li>
-                                            <li class="list-inline-item text-muted small"><i class="bi bi-folder2"></i><a href="#" class="text-pink"> <?php the_category(' '); ?></a></li>
+                                            <li class="list-inline-item text-muted small"><i class="bi bi-folder2"></i> <?php the_category(' '); ?></li>
                                         </ul>
                                         <p class="card-text"><?php echo wp_strip_all_tags(get_the_excerpt(), true); ?></p>
                                     </div>
@@ -40,7 +129,7 @@
                 else: 
                     _e( 'Sorry, no pages matched your criteria.', 'textdomain' ); 
                 endif; 
-            ?>
+            ?> <!-- /post -->
 
             <!-- pagination -->
             <nav class="nav-bb py-4 d-flex justify-content-center">
@@ -49,48 +138,61 @@
         </div> <!-- /.col-md-9 -->
 
         <div class="col-md-3 px-0 px-md-3">
-                <div class="sticky-top pt-4 sticky-ahua">
-                    <?php get_search_form( ); ?>
-                    
-                    <!-- Kategori -->
-                    <div class="card mb-4 border-0 rounded-0">
-                        <div class="card-header border-0 rounded-0">
-                            <p class="m-0">Kategori</p>
-                        </div>
-                        <div class="card-body list-group pt-0 pe-0">
-                            <a href="kategori.html"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0">Musik
-                                <span class="badge rounded-pill bg-primary">1</span></a>
-                            <a href="kategori.html"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0">Komputer
-                                <span class="badge rounded-pill bg-primary">6</span></a>
-                            <a href="kategori.html"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0">Film
-                                <span class="badge rounded-pill bg-primary">3</span></a>
-                            <a href="kategori.html"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0">Tidak
-                                Berkategori <span class="badge rounded-pill bg-primary">5</span></a>
-                        </div>
+            <div class="sticky-top pt-4 sticky-ahua">
+                <?php get_search_form( ); ?>
+                
+                <!-- Kategori -->
+                <div class="card mb-4 border-0 rounded-0">
+                    <div class="card-header border-0 rounded-0">
+                        <p class="m-0">Kategori</p>
                     </div>
-                    <!--/kategori-->
+                    <div class="card-body list-group pt-0 pe-0">
+                        <?php 
+                            $args = array(
+                                // 'hide_empty' => TRUE,
+                            );
 
-                    <!-- Tags-->
-                    <div class="card mb-4 border-0 rounded-0">
-                        <div class="card-header border-0 rounded-0">Tags</div>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-0 m-1">Laravel</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-0 m-1">PHP</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-0 m-1">Perang</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-0 m-1">Meme</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-0 m-1">Aksi</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-0 m-1">Komputer</a>
-                        </div>
+                            $categories = get_categories( $args );
+                            
+                            foreach( $categories as $category ) {
+                                echo '<a href="'. get_category_link( $category->term_id ) .'" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0">' . $category->name . ' <span class="badge rounded-pill bg-primary">' . $category->category_count . '</span></a>';
+                            } 
+                        ?>
                     </div>
-                    <!--/tags-->
-                </div> <!-- /sticky-->
-            </div> <!-- /col-md-3-->
-    </div>
-</div>
+                </div> <!--/kategori-->
+
+                <!-- Tags-->
+                <div class="card mb-4 border-0 rounded-0">
+                    <div class="card-header border-0 rounded-0">Tags</div>
+                    <div class="card-body">
+
+                        <?php 
+                            $args = array(  
+
+                            );
+
+                            $tags = get_tags( $args );
+
+                            foreach ( $tags as $tag ) {
+                                $tag_link = get_tag_link( $tag->term_id );
+                                        
+                                $html .= "<a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
+                                $html .= "{$tag->name}</a>";
+
+                                echo '<a href="'.get_tag_link( $tag->term_id ).'" class="btn btn-outline-primary btn-sm rounded-0 m-1">'.$tag->name.'</a>' ;
+                            }
+                        ?>
+                    </div>
+                </div> <!-- /tags -->
+            </div> <!-- /sticky-->
+        </div> <!-- /col-md-3-->
+    </div> <!-- /row -->
+</div> <!-- /container-fluid -->
+
+<!-- Footer-->
+<footer class="py-4 bg-dark-ffe text-light">
+    <p class="m-0 text-center">Ferry Fernando</p>
+</footer> <!-- /footer-->
 
 
 <!-- Bootstrap core JS-->
