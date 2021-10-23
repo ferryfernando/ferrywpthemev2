@@ -92,10 +92,14 @@ a, a.text-pink {
     text-decoration: none;
 }
 
-a:hover, a.text-pink:hover {
+h3.card-title a:hover, .card-body li a:hover {
     color: #f012be;
     text-decoration: underline;
 }
+/* 
+a.nav-link:hover {
+    text-decoration: none;
+} */
 
 .form-control:focus {
     color: #212529;
@@ -188,3 +192,4 @@ article p, img, figure, h1, ul.list-inline {
         display: block;
     }
 }
+

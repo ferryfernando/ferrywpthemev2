@@ -6,104 +6,83 @@
         
             <!-- Carousel -->
             <div id="carouselExampleDark" class="carousel carousel-dark slide p-0" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-
-                <div class="carousel-inner">
-
-                <?php
-                    $args = array(
-                        'posts_per_page' => 3,
-                        'post__in' => get_option( 'sticky_posts' ),
-                        'ignore_sticky_posts' => 1
-                );
-                $query = new WP_Query( $args );
-
-                    if ( $query->have_posts() ) : 
-                        // Start the Loop 
-                        while ( $query->have_posts() ) : $query->the_post(); 
-                            echo the_title();
-                        // End the Loop 
-                        endwhile; 
-                    else: 
-                    // If no posts match this query, output this text. 
-                        _e( 'Sorry, no posts matched your criteria.', 'textdomain' ); 
-                    endif;
-
-                ?>
-                
-                    <div class="carousel-item active" data-bs-interval="5000">
-                        <img src="1.jpg" class="d-block w-100" alt="slide-satu">
-                        <div class="carousel-caption">
-                            <h3><a href="lihat-post.html" class="text-pink">Slide Satu</a></h3>
-                            <ul class="list-inline">
-                                <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i> Selasa, 21-01-2020</li>
-                                <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a href="#" class="text-pink"> Musik</a></li>
-                            </ul>
-                            <p class="d-none d-sm-block text-white">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Integer posuere erat a ante. Nulla vitae elit libero, a pharetra
-                                augue mollis interdum.</p>
-                        </div>
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
                     </div>
-                    <div class="carousel-item" data-bs-interval="5000">
-                        <img src="2.jpg" class="d-block w-100" alt="slide-dua.">
-                        <div class="carousel-caption">
-                            <h3><a href="lihat-post.html" class="text-pink">Slide Satu</a></h3>
-                            <ul class="list-inline">
-                                <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i>
-                                    Selasa, 21-01-2020</li>
-                                <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a
-                                        href="#" class="text-pink"> Musik</a></li>
-                            </ul>
-                            <p class="d-none d-sm-block text-white">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Integer posuere erat a ante. Nulla vitae elit libero, a pharetra
-                                augue mollis interdum.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item" data-bs-interval="5000">
-                        <img src="3.jpg" class="d-block w-100" alt="slide-tiga">
-                        <div class="carousel-caption">
-                            <h3><a href="lihat-post.html" class="text-pink">Slide Satu</a></h3>
-                            <ul class="list-inline">
-                                <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i>
-                                    Selasa, 21-01-2020</li>
-                                <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a
-                                        href="#" class="text-pink"> Musik</a></li>
-                            </ul>
-                            <p class="d-none d-sm-block text-white">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Integer posuere erat a ante. Nulla vitae elit libero, a pharetra
-                                augue mollis interdum.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
+                    <div class="carousel-inner">
+                        <?php
+                            $sticky = get_option( 'sticky_posts' );
+                            
+                            $args = array(
+                                'posts_per_page' => 3,
+                                'post__in' => $sticky,
+                                'ignore_sticky_posts' => 1
+                            );
 
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div> <!-- /Carausel-->
+                            $query = new WP_Query( $args );
+
+                            if($query->have_posts()) :
+                                $i = 1;
+                                while($query->have_posts()) : $query->the_post(); ?>
+                        
+                                <div class="carousel-item <?php if ($i == 1) echo 'active' ;?>">
+                                    <?php //ferrywptheme_image(); ?>
+                                    <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute() ?>">
+                                    <div class="carousel-caption">
+                                        <h3><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h3>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i> <?php the_time('l, d F Y') ?></li>
+                                            <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a href="#"> <?php the_category(' '); ?></a></li>
+                                        </ul>   
+                                        <p class="d-none d-sm-block text-white"><?php echo wp_strip_all_tags(get_the_excerpt(), true); ?></p>
+                                    </div>
+                                </div>  
+                                
+                            <?php $i++;endwhile;
+                            endif;
+                            wp_reset_postdata(  )  ;
+                        ?>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div> <!-- /Carausel-->
 
             <!-- Post-->
             <?php 
-                if ( have_posts() ) : 
-                    while ( have_posts() ) : the_post(); ?> 
+                // Example argument that defines three posts per page. 
+                $args = array( 
+                    // 'posts_per_page' => 3,
+                    'post__not_in' => get_option( 'sticky_posts' ) 
+                ); 
+                
+                // Variable to call WP_Query. 
+                $query = new WP_Query( $args ); 
+
+                if ( $query->have_posts() ) : 
+                    while ( $query->have_posts() ) : $query->the_post(); ?> 
                     <article>
                         <div class="card border-top-0 border-start-0 border-end-0 rounded-0 ps-sm-3">
                             <div class="row g-0">
                                 <div class="col-sm-3 d-none d-sm-block my-auto py-xl-3">
                                     <?php
                                         if (has_post_thumbnail()) { ?>
-                                            <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute() ?>">
+                                            <img src="<?php the_post_thumbnail_url('large'); ?>" class="card-img" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute() ?>">
                                     <?php 
                                         } else { ?>
                                             <img src="https://via.placeholder.com/200x150?text=Gambar+Post" class="card-img" alt="https://via.placeholder.com/200x150?text=Gambar+Post">
@@ -129,6 +108,7 @@
                 else: 
                     _e( 'Sorry, no pages matched your criteria.', 'textdomain' ); 
                 endif; 
+                wp_reset_postdata(); 
             ?> <!-- /post -->
 
             <!-- pagination -->
