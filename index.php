@@ -32,8 +32,7 @@
                                 while($query->have_posts()) : $query->the_post(); ?>
                         
                                 <div class="carousel-item <?php if ($i == 1) echo 'active' ;?>">
-                                    <?php //ferrywptheme_image(); ?>
-                                    <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute() ?>">
+                                    <?php ferrywptheme_image(); ?>
                                     <div class="carousel-caption">
                                         <h3><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h3>
                                         <ul class="list-inline">
@@ -82,7 +81,7 @@
                                 <div class="col-sm-3 d-none d-sm-block my-auto py-xl-3">
                                     <?php
                                         if (has_post_thumbnail()) { ?>
-                                            <img src="<?php the_post_thumbnail_url('large'); ?>" class="card-img" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute() ?>">
+                                            <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute() ?>">
                                     <?php 
                                         } else { ?>
                                             <img src="https://via.placeholder.com/200x150?text=Gambar+Post" class="card-img" alt="https://via.placeholder.com/200x150?text=Gambar+Post">

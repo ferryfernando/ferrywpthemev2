@@ -38,7 +38,20 @@ function register_navwalker() {
 add_action( 'after_setup_theme', 'register_navwalker' );
 
 
+/**
+ * Manggil image responsive
+ */
+function ferrywptheme_image() {
+	$id = get_post_thumbnail_id();
+	$img_src = esc_attr(wp_get_attachment_image_url( $id ));
+	$img_srcset = wp_get_attachment_image_srcset( $id );
+	$img_alt = get_post_meta( $id, '_wp_attachment_image_alt', true );
+	// $image_title = get_the_title();
 
+	//echo "<img src='$img_src' srcset='$img_srcset' alt='$img_alt' sizes='100vw'>";
+	echo "<img class='d-block w-100' src='$img_src' srcset='$img_srcset' alt='$img_alt' title='$img_alt' >";
+
+}
 
 
 ?>
