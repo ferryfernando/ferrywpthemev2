@@ -92,10 +92,11 @@ a, a.text-pink {
     text-decoration: none;
 }
 
-h3.card-title a:hover, .card-body li a:hover {
+h3.card-title a:hover, .card-body li a:hover, a:hover {
     color: #f012be;
     text-decoration: underline;
 }
+
 /* 
 a.nav-link:hover {
     text-decoration: none;

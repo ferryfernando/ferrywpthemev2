@@ -37,7 +37,7 @@
                                         <h3><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h3>
                                         <ul class="list-inline">
                                             <li class="list-inline-item text-white small"><i class="bi bi-calendar4-event"></i> <?php the_time('l, d F Y') ?></li>
-                                            <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i><a href="#"> <?php the_category(' '); ?></a></li>
+                                            <li class="list-inline-item text-white small"><i class="bi bi-folder2"></i> <?php the_category(' '); ?></li>
                                         </ul>   
                                         <p class="d-none d-sm-block text-white"><?php echo wp_strip_all_tags(get_the_excerpt(), true); ?></p>
                                     </div>
