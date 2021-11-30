@@ -21,7 +21,6 @@ function ferrywpthemev2_scripts() {
 	wp_enqueue_style( 'bootstrap-sytle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' );
 	wp_enqueue_style( 'bootstrap-icon', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css' );
 	wp_enqueue_style( 'ubuntu-font', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap' );
-    // wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js');
 	wp_enqueue_style( 'ferrywpthemev2-style', get_stylesheet_uri() );
 
 	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -115,32 +114,20 @@ function bootstrap_pagination( \WP_Query $wp_query = null, $echo = true, $params
     return null;
 }
 
-/**
- * Halt the main query in the case of an empty search 
- */
-// add_filter( 'posts_search', function( $search, \WP_Query $q )
-// {
-//     if( empty( get_search_query() ) && $q->is_search() && $q->is_main_query() )
-//         $search .=" AND 0=1 ";
-
-//     return $search;
-// }, 10, 2 );
-
-// add_filter ('get_archives_link',
-// function ($link_html, $url, $text, $format, $before, $after) {
-//     if ('custom' == $format) {
+add_filter ('get_archives_link',
+function ($link_html, $url, $text, $format, $before, $after) {
+    if ('aaaa' == $format) {
         
-//         global $wp;
-//         $current_url = home_url( add_query_arg( array(), $wp->request ) );
+        global $wp;
+        $current_url = home_url( add_query_arg( array(), $wp->request ) );
 
-//         $cc = $GLOBALS['wp_query']->post_count;
+        $active_classname =  $current_url === $url ? 'active' : 'ddd';
+        $pc = $wp->post_count;
 
-//         $active_classname =  $current_url === $url ? 'active' : '';
-
-//         $link_html = "<li class=\"year-archive\"><a href=\"$url#dreams\" class=\"$active_classname\">$text</a>&nbsp;($cc $aa df)</li>";
-//     }
-//     return $link_html;
-// }, 10, 6);
+        $link_html = "<a href=\"$url\" class=\"list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0  $active_classname\">$text $show_post_count</a>";
+    }
+    return $link_html;
+}, 10, 6);  
 
 /**
  * Adds a span around post counts in the archive widget.
@@ -148,11 +135,20 @@ function bootstrap_pagination( \WP_Query $wp_query = null, $echo = true, $params
  * @param   string  $links      The comment fields.
  * @return  string
  */
-function wpdocs_archive_count_span( $links ) {
-    $links = str_replace( '</a>&nbsp;(', '<span class="badge rounded-pill bg-primary">', $links );
-    $links = str_replace( ')', '</span></a>', $links );
-    return $links;
-}
-add_filter( 'get_archives_link', 'wpdocs_archive_count_span' );
+// function wpdocs_archive_count_span( $dsfsd ) {
+//     $dsfsd = str_replace( '</a>&nbsp;(', '<span class="badge rounded-pill bg-primary">', $dsfsd );
+//     $dsfsd = str_replace( ')', '</span></a>', $dsfsd );
+//     return $dsfsd;
+// }
+// add_filter( 'get_archives_link', 'wpdocs_archive_count_span' );
+
+
+// function ahua( $link_html, $url, $format, $text, $before, $after ) {
+//     if ( 'link' === $custom ) {
+//     $link_html = "\t$before<a href='$url'$aria_current>$text</a>$after\n";
+//     }
+//     return $link_html;
+// }
+// add_filter( 'get_archives_link', 'ahua' );
 
 ?>

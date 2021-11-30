@@ -9,6 +9,7 @@
     <meta name="author" content="Ferry Fernando" />
 
     <?php wp_head(); ?>
+
 </head>
 
 <body <?php body_class(); ?>>
