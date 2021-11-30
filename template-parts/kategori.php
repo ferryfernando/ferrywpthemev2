@@ -6,15 +6,12 @@
     <div class="card-body list-group pt-0 pe-0">
         <?php 
             $args = array(
-                // 'hide_empty' => TRUE,
-                // 'current_category' => 1,
                 'exclude' => 2,
             );
 
             $categories = get_categories( $args );
             
             foreach( $categories as $category ) {
-                // if (get_category_link( $category->term_id ) == get_category_link( get_query_var( 'cat' ) ) {$a = 1});
                 echo '<a href="'. get_category_link( $category->term_id ) .'" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 '. (get_category_link( $category->term_id ) == get_category_link( get_query_var( 'cat' ) ) ? 'active' : '') .' ">' . $category->name . ' <span class="badge rounded-pill bg-primary">' . $category->category_count . '</span></a>';
             } 
             wp_reset_postdata();

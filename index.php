@@ -1,48 +1,31 @@
-<?php
+<?php get_header( ); ?>
 
-get_header( );
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 p-0">
+			<?php
+				if (have_posts()) :
+					while (have_posts()) : the_post();
+				?>
+            <article class="px-3">
+				<h1 class="mt-4 fw-bold text-primary"><?php the_title( ); ?></h1>
+				<?php get_template_part( 'template-parts/post-meta' ) ?>                    
+				<?php the_content() ?>
+            </article> 
+			<?php endwhile;
+				else :
+				?>
+				<div class="alert alert-danger" role="alert">
+                	Tidak ada konten.
+            	</div>
+				<?php
+				endif; 
+            ?>
+        </div> <!-- /.col-md-9 -->
 
-echo "Index <br>";
+        <?php get_template_part( 'sidebar' ); ?>
+        
+    </div> <!-- /row -->
+</div> <!-- /container-fluid -->
 
-$args = array(  
-
-);
-
-$tags = get_tags( $args );
-
-foreach ( $tags as $tag ) {
-    $tag_link = get_tag_link( $tag->term_id );
-            
-    $html .= "<a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
-    $html .= "{$tag->name}</a>";
-
-    // echo '<a href="'.get_tag_link( $tag->term_id ).'" class="btn btn-outline-primary btn-sm rounded-0 m-1">'.$tag->name.'</a>' ;
-    echo get_tag_link( $tag->term_id );
-    echo '<a href="'. get_tag_link( $tag->term_id ) .'" class="btn btn-outline-primary btn-sm rounded-0 m-1 '. (get_tag_link( $tag->term_id ) == get_tag_link( get_query_var( 'tag' ) ) ? 'active' : '') .' ">' . $tag->name . '</a>';
-}
-
-
-$tags = get_tags();
-$query = new WP_Term_Query(array(
-	'object_ids' =>  get_the_ID(),
-	'fields'     => 'ids',
-));
-$current = $query->get_terms();
-if ( $tags ) {
-	foreach ( $tags as $tag ) {
-		$classes = in_array( $tag->term_id, $current )?'btn btn-outline-primary btn-sm rounded-0 m-1 active':'btn btn-outline-primary btn-sm rounded-0 m-1';
-		printf('<a class="%1$s" href="%2$s">%3$s</a>',
-		    $classes,
-		    get_tag_link( $tag->term_id ),
-		    $tag->name
-		);
-	}
-}
-
-get_footer( );
-
-?>
- 
-
-
-
+<?php get_footer(); ?>

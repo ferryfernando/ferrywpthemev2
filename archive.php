@@ -9,7 +9,6 @@
 						single_tag_title('Tag: ', 'textdomain'); 
 					}
 					else {
-						// wp_title('');
 						the_archive_title();
 					}
 				?>

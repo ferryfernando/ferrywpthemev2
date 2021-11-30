@@ -21,12 +21,7 @@ function ferrywpthemev2_scripts() {
 	wp_enqueue_style( 'bootstrap-sytle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' );
 	wp_enqueue_style( 'bootstrap-icon', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css' );
 	wp_enqueue_style( 'ubuntu-font', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap' );
-    // wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js');
 	wp_enqueue_style( 'ferrywpthemev2-style', get_stylesheet_uri() );
-
-	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-	// 	wp_enqueue_script( 'comment-reply' );
-	// }
 }
 add_action( 'wp_enqueue_scripts', 'ferrywpthemev2_scripts' );
 
@@ -56,11 +51,8 @@ function ferrywptheme_image() {
 	$img_src = esc_attr(wp_get_attachment_image_url( $id ));
 	$img_srcset = wp_get_attachment_image_srcset( $id );
 	$img_alt = get_post_meta( $id, '_wp_attachment_image_alt', true );
-	// $image_title = get_the_title();
 
-	//echo "<img src='$img_src' srcset='$img_srcset' alt='$img_alt' sizes='100vw'>";
 	echo "<img class='d-block w-100' src='$img_src' srcset='$img_srcset' alt='$img_alt' title='$img_alt' >";
-
 }
 
 /**
@@ -72,11 +64,6 @@ function bootstrap_pagination( \WP_Query $wp_query = null, $echo = true, $params
     }
 
     $add_args = [];
-
-    //add query (GET) parameters to generated page URLs
-    /*if (isset($_GET[ 'sort' ])) {
-        $add_args[ 'sort' ] = (string)$_GET[ 'sort' ];
-    }*/
 
     $pages = paginate_links( array_merge( [
             'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
@@ -114,33 +101,6 @@ function bootstrap_pagination( \WP_Query $wp_query = null, $echo = true, $params
 
     return null;
 }
-
-/**
- * Halt the main query in the case of an empty search 
- */
-// add_filter( 'posts_search', function( $search, \WP_Query $q )
-// {
-//     if( empty( get_search_query() ) && $q->is_search() && $q->is_main_query() )
-//         $search .=" AND 0=1 ";
-
-//     return $search;
-// }, 10, 2 );
-
-// add_filter ('get_archives_link',
-// function ($link_html, $url, $text, $format, $before, $after) {
-//     if ('custom' == $format) {
-        
-//         global $wp;
-//         $current_url = home_url( add_query_arg( array(), $wp->request ) );
-
-//         $cc = $GLOBALS['wp_query']->post_count;
-
-//         $active_classname =  $current_url === $url ? 'active' : '';
-
-//         $link_html = "<li class=\"year-archive\"><a href=\"$url#dreams\" class=\"$active_classname\">$text</a>&nbsp;($cc $aa df)</li>";
-//     }
-//     return $link_html;
-// }, 10, 6);
 
 /**
  * Adds a span around post counts in the archive widget.
