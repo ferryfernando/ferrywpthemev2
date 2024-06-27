@@ -1,31 +1,33 @@
 /*!
-Theme Name: Ferry WP Theme v2
+Theme Name: OLD
 Theme URI: http://www.ferryfernando.com/
 Author: Ferry Fernando
 Author URI: http://www.ferryfernando.com
-Description: Theme yang terinspirasi dari Staterbootsrap/Resume, menggunakan Bootstrap 5.
-Version: 2.0.0
+Description: Theme yang terinspirasi dari Staterbootsrap/Resume, menggunakan Bootstrap 5.3.3.
+Version: 3.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: bootstrap, side-bar
 
-Terima kasih untuk semuanya. Mudah-mudahan tidak ada melanggar apa-apa yah.
+Terima kasih untuk semuanya. Mudah-mudahan tidak ada melanggar apa-apa.
 */
+
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth;
+    }
+}
+
 
 body {
     padding-top: 3.375rem;
     font-family: 'Ubuntu', sans-serif;
 }
 
-h1,
-.h1 {
-    line-height: 1;
-}
-
 img {
-	height: auto;
-	max-width: 100%;
-	vertical-align: middle;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
 }
 
 #sideNav {
@@ -39,6 +41,7 @@ img {
 
 
 @media (max-width: 767.98px) {
+
     #jumbo,
     .nav-bb {
         border-bottom: 1px solid #dee2e6;
@@ -94,19 +97,14 @@ img {
     box-shadow: 0 0 0 0.25rem rgb(240 18 190 / 50%);
 }
 
-/* .btn-check:active+.btn-outline-primary,
-.btn-check:checked+.btn-outline-primary,
-.btn-outline-primary.active,
-.btn-outline-primary.dropdown-toggle.show,
-.btn-outline-primary:active {
-    border-color: #f012be;
-} */
-
-a, a.text-pink {
+a,
+a.text-pink {
     text-decoration: none;
 }
 
-h3 a:hover, .card-body li a:hover, ul li a:hover {
+h3 a:hover,
+.card-body li a:hover,
+ul li a:hover {
     color: #f012be;
     text-decoration: underline;
 }
@@ -209,24 +207,25 @@ article p, img, figure, h1, ul.list-inline {
 }
 
 img {
-	height: auto;
-	max-width: 100%;
-	vertical-align: middle;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
 }
 
-.active a span{
+.active a span {
     color: #fff;
-  }
+}
 
-  .page-item.active .page-link {
-      background-color: #f012be;
-      border-color: #f012be;
-  }
+.page-item.active .page-link {
+    background-color: #f012be;
+    border-color: #f012be;
+}
 
-  .page-link:hover {
-      text-decoration: none;
-  }
+.page-link:hover {
+    text-decoration: none;
+}
 
-  .post-last-modified-td, .page-last-modified-td {
+.post-last-modified-td,
+.page-last-modified-td {
     display: inline-block !important;
 }
